@@ -1,64 +1,17 @@
-from tkinter import *
-import random
+# References: Inspired by Angela Yu's 100 Day Python Class (flash card project).
+# 1000 most frequently used Nepali words from https://1000mostcommonwords.com/1000-most-common-nepali-words/?_ga=2.230450588.1648665285.1641086668-45386293.1641086668&_gl=1%2A1nafr1s%2A_ga%2ANDUzODYyOTMuMTY0MTA4NjY2OA..%2A_ga_8KVRFXKPM6%2AMTY0MTA4NjY2Ny4xLjAuMTY0MTA4NjY2Ny4w
+# Only for initial launch or if needed to revert to original stacks, run make_card_stacks.py to create stacks of cards (20 cards per stack).
 import pandas
+from make_card_stacks import CardStacks
+from go_thru_stack import GoThruStack
 
-BACKGROUND_COLOR = "#B1DDC6"
-row = 0
+all_words_df = pandas.read_csv("data/original_100_common_words.csv")
+card_stacks = CardStacks(all_words_df)
+go_thru_stack = GoThruStack("stack_1")
 
-# Basic/static UI SETUP_________________________________________________
-window = Tk()
-window.title("Flash Cards")
-window.config(padx=30, pady=30, bg=BACKGROUND_COLOR, highlightthickness=0)
+# TODO: begin the game w this. allow user to choose 1--20 words, 21-40 words etc. Choose stack of cards. in each card, remember the progress.
+# TODO: make a home button.
+# TODO: change style of UI look. color, shape etc.
+# TODO: add a word count. show it somewhere (total words, words remembered, words went through, words not remembered)
+# TODO: what is a better way of doing click_right() other than breaking up the loop to several functions?
 
-canvas = Canvas(width=900, height=550, bg=BACKGROUND_COLOR, highlightthickness=0)
-card_front_img = PhotoImage(file="images/card_front.png")
-card_back_img = PhotoImage(file="images/card_back.png")
-
-# showing card using word list_________________________________________________
-df = pandas.read_csv("data/french_words.csv")
-
-
-def front_card():
-    global row
-    random_row = random.randint(1, len(df.index))
-
-    row = random_row
-
-    canvas.create_image(450, 280, image=card_front_img)
-    canvas.create_text(435, 120, text="French", fill="Black", font=("Arial", 30, "italic"))
-    canvas.create_text(440, 280, text=f"{df.iloc[random_row, 0]}", fill="Black", font=("Arial", 40, "bold"))
-    canvas.grid(column=0, row=0, columnspan=2)
-
-    window.after(3000, back_card, random_row)
-
-
-def back_card(random_row):
-    canvas.create_image(450, 280, image=card_back_img)
-    canvas.create_text(435, 120, text="English", fill="Black", font=("Arial", 30, "italic"))
-    canvas.create_text(440, 280, text=f"{df.iloc[random_row, 1]}", fill="Black", font=("Arial", 40, "bold"))
-    canvas.grid(column=0, row=0, columnspan=2)
-
-
-# Buttons_________________________________________________
-
-
-def click_right():
-    global row
-    df.drop(index=row, inplace=True)
-    df.to_csv("data/french_words.csv", index=False)
-    front_card()
-
-
-right_img = PhotoImage(file="images/right.png")
-button_right = Button(image=right_img, highlightthickness=0, command=
-                      click_right, bd=0)
-button_right.grid(column=1, row=1)
-
-wrong_img = PhotoImage(file="images/wrong.png")
-button_wrong = Button(image=wrong_img, highlightthickness=0, command=
-                      front_card, bd=0)
-button_wrong.grid(column=0, row=1)
-
-front_card()
-
-window.mainloop()
