@@ -11,7 +11,6 @@ go_thru_stack = GoThruStack("stack_1")
 
 # TODO: begin the game w this. allow user to choose 1--20 words, 21-40 words etc. Choose stack of cards. in each card, remember the progress.
 # TODO: make a home button.
-# TODO: change style of UI look. color, shape etc.
-# TODO: add a word count. show it somewhere (total words, words remembered, words went through, words not remembered)
+# TODO: add a word count. show it somewhere (total words, words remembered, words went through, words not remembered). save this in a separate cvs file (save review progress)
 # TODO: what is a better way of doing click_right() other than breaking up the loop to several functions?
 
