@@ -24,26 +24,34 @@ class CardBrain:
     self.window = Tk()
     self.window.title("Flash Cards")
     self.window.config(padx=30, pady=30, bg=BACKGROUND_COLOR, highlightthickness=0)
+
     self.canvas = Canvas(width=900, height=550, bg=BACKGROUND_COLOR, highlightthickness=0)
+    self.canvas.grid(column=0, row=1, columnspan=3)
+
     self.card_front_img = PhotoImage(file="images/card_front.png")
     self.card_back_img = PhotoImage(file="images/card_back.png")
     self.canvas_image = self.canvas.create_image(450, 280, image=self.card_front_img)
     self.card_title = self.canvas.create_text(435, 120, text="", fill="Black", font=("Arial", 30, "italic"))
     self.word_text = self.canvas.create_text(440, 280, text="", fill="Black", font=("Arial", 60, "normal"))
-    self.canvas.grid(column=0, row=0, columnspan=3)
+
     self.button_style = font.Font(family='Helvetica', size=20, weight='bold')
 
-    button_wrong = Button(text="Need to review", command=self.click_right, bd=0, highlightthickness=0,
-                          highlightbackground=BACKGROUND_COLOR, font=self.button_style, padx=10, pady=5, borderwidth=0)
-    button_wrong.grid(column=0, row=1)
-    button_right = Button(text="I know this!", command=self.click_right, bd=0, highlightthickness=0, highlightbackground=BACKGROUND_COLOR, font=self.button_style, padx=20, pady=5, borderwidth=0)
-    button_right.grid(column=2, row=1)
     info_img = PhotoImage(file="images/info.png")
     info_button = Button(image=info_img, command=self.click_info, highlightthickness=0, bd=0)
-    info_button.grid(column=1, row=2, pady=20)
+    info_button.grid(column=3, row=0, pady=20)
 
-    self.front_card()
+    self.home_page()
     self.window.mainloop()
+
+  # home page
+  def home_page(self):
+    self.btn_stack_1 = Button(text="Words 1 - 20", command=self.front_card, bd=0, highlightthickness=0,
+                          highlightbackground=BACKGROUND_COLOR, font=self.button_style, padx=10, pady=5, borderwidth=0)
+    # TODO: FLAG start here. refactor this to make a function to make 5 buttons.
+    #  self.btn_stack_1.grid(column=0, row=1)
+
+  def hide_stack_btn(self):
+    self.btn_stack_1.grid_forget()
 
   # showing cards ___________________________________________________________________
   def front_card(self):
@@ -52,13 +60,21 @@ class CardBrain:
     self.canvas.itemconfig(self.canvas_image, image=self.card_front_img)
     self.canvas.itemconfig(self.card_title, text="Nepali", fill="Black")
     self.canvas.itemconfig(self.word_text, text=self.new_dict[rank][1], fill="Black")
+    self.hide_stack_btn()
     self.flip_timer = self.window.after(4000, self.back_card)
+    button_wrong = Button(text="Need to review", command=self.click_right, bd=0, highlightthickness=0,
+                          highlightbackground=BACKGROUND_COLOR, font=self.button_style, padx=10, pady=5, borderwidth=0)
+    button_wrong.grid(column=0, row=3)
+    button_right = Button(text="I know this!", command=self.click_right, bd=0, highlightthickness=0,
+                          highlightbackground=BACKGROUND_COLOR, font=self.button_style, padx=20, pady=5, borderwidth=0)
+    button_right.grid(column=2, row=3)
 
   def back_card(self):
     rank = self.shuffled_rank[self.i]
     self.canvas.itemconfig(self.canvas_image, image=self.card_back_img)
     self.canvas.itemconfig(self.card_title, text="English", fill="White")
     self.canvas.itemconfig(self.word_text, text=self.new_dict[rank][2], fill="White")
+    self.hide_stack_btn()
 
   # Buttons_____________________________________________________________________________
   def end_of_cards(self):
