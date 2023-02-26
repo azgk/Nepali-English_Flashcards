@@ -24,5 +24,3 @@ class GoThruStack:
     self.card_num = len(new_dict)
     new_df = pandas.DataFrame.from_dict(card_brain.new_dict, orient='index', columns=["Rank of Frequency", "Nepali", "English"])
     new_df.to_csv(f"data/{stack}.csv")
-    q_df = pandas.DataFrame.from_dict(card_brain.words_in_question, orient='index', columns=["Rank of Frequency", "Nepali", "English"])
-    q_df.to_csv("data/words_in_question.csv", mode="a")
