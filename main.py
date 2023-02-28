@@ -5,13 +5,11 @@ from make_card_stacks import CardStacks
 from card_brain import CardBrain
 
 all_words_df = pandas.read_csv("data/original_100_common_words.csv")
-# card_stacks = CardStacks(all_words_df) # This line only need to be run once unless new words are added to the
-# original list. Or, if you want to reset card stacks.
+# This line only need to be run once unless new words are added to the original list. Or, if you want to reset card
+# stacks.
+card_stacks = CardStacks(all_words_df)
 card_brain = CardBrain()
 
-# TODO: add a word count. show it somewhere (total words, words remembered, words went through, words not remembered). save this in a separate cvs file (save review progress)
-# TODO: what is a better way of doing click_right() other than breaking up the loop to several functions?
 # TODO: update readme to add features etc. add a photo for nepal.
 # TODO: make a repl link.
-#  word 88 is wrong. add nepali word for picture. 
 
