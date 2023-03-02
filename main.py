@@ -7,9 +7,7 @@ from card_brain import CardBrain
 all_words_df = pandas.read_csv("data/original_100_common_words.csv")
 # This line only need to be run once unless new words are added to the original list. Or, if you want to reset card
 # stacks.
-card_stacks = CardStacks(all_words_df)
+# card_stacks = CardStacks(all_words_df)
 card_brain = CardBrain()
 
-# TODO: update readme to add features etc. add a photo for nepal.
-# TODO: make a repl link.
 
