@@ -14,5 +14,5 @@ click 'I know this!' so it will not show up next time. Otherwise, click 'Need to
 uncomment line 10. After new stacks are created, comment out line 10. 
 
 ## Program Output
-<img alt="Image of home page" src="images/home_page.png" title="home image" width="100%"/>
-<img alt="Image of front card" src="images/project_screenshot.png" title="front card" width="100%"/>
+<img alt="Image of home page" src="images/home_page.png" title="home image" width="80%"/>
+<img alt="Image of front card" src="images/project_screenshot.png" title="front card" width="80%"/>
