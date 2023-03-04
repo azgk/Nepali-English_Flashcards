@@ -11,7 +11,7 @@ someone from Nepal, this game will help you learn a few words and get closer to 
 click 'I know this!' so it will not show up next time. Otherwise, click 'Need to review' so it stays in the stack.
 2. Note that if you go back to home page before going through a stack of flashcards, your progress will not be saved.
 3. If you want to learn another set of 100 words, simply update data/original_100_common_words.csv. Then in main.py, 
-uncomment line 10. After new stacks are created, comment out line 10. 
+uncomment line 12. After new stacks are created, comment out line 12. 
 
 ## Program Output
 <img alt="Image of home page" src="images/home_page.png" title="home image" width="80%"/>
